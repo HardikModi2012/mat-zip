@@ -1,0 +1,74 @@
+<div class="container">
+  <form class="example-form" [formGroup]="signUpForm" (ngSubmit)="signup()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="emailFormControl">
+      <mat-error
+        *ngIf="signUpForm.controls['emailFormControl'].invalid && (signUpForm.controls['emailFormControl'].dirty || signUpForm.controls['emailFormControl'].touched)">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>password</mat-label>
+      <input matInput type="password" formControlName="passwordFormControl">
+      <mat-error
+        *ngIf="signUpForm.controls['passwordFormControl'].invalid && (signUpForm.controls['passwordFormControl'].dirty || signUpForm.controls['passwordFormControl'].touched)">
+        Please enter a valid password
+      </mat-error>
+    </mat-form-field>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstNameFormControl">
+            <mat-error
+              *ngIf="signUpForm.controls['firstNameFormControl'].invalid && (signUpForm.controls['firstNameFormControl'].dirty || signUpForm.controls['firstNameFormControl'].touched)">
+              Please enter your first name
+            </mat-error>
+          </mat-form-field></td>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastNameFormControl">
+            <mat-error
+              *ngIf="signUpForm.controls['lastNameFormControl'].invalid && (signUpForm.controls['lastNameFormControl'].dirty || signUpForm.controls['lastNameFormControl'].touched)">
+              Please enter your last name
+            </mat-error>
+          </mat-form-field></td>
+      </tr>
+    </table>
+    <label id="example-radio-group-label">Personal information</label>
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button (click)="radioButtonValue(1)" value="1">Yes</mat-radio-button>
+      <mat-radio-button (click)="radioButtonValue(2)" value="2">No</mat-radio-button>
+    </mat-radio-group>
+
+    <div *ngIf="showFields">
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dateFormControl">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="signUpForm.controls['dateFormControl'].invalid && (signUpForm.controls['dateFormControl'].dirty || signUpForm.controls['dateFormControl'].touched)">
+          Please add your D.O.B
+        </mat-error>
+      </mat-form-field>
+      <p *ngIf="signUpForm.controls['dateFormControl'].value">Age: {{ signUpForm.controls['dateFormControl'].value |
+        calculateAge}}</p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Address</mat-label>
+          <textarea matInput formControlName="AddressFormControl"></textarea>
+          <mat-error
+            *ngIf="signUpForm.controls['AddressFormControl'].invalid && (signUpForm.controls['AddressFormControl'].dirty || signUpForm.controls['AddressFormControl'].touched)">
+            Please add your address
+          </mat-error>
+        </mat-form-field>
+      </p>
+    </div>
+    <div class="example-button-row">
+      <button mat-raised-button type="submit">sign up</button>
+    </div>
+  </form>
+</div>
