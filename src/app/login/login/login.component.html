@@ -1,0 +1,27 @@
+<div class="container">
+  <form class="example-form" #loginForm="ngForm" (ngSubmit)="login()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <!-- <input type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com"> -->
+      <input type="email" class="form-control" id="email" required [(ngModel)]="model.email" name="email"
+        #email="ngModel">
+      <mat-error *ngIf="email.valid || email.pristine">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <!-- <input type="password" matInput formControlName="passwordFormControl" placeholder="Ex. pat@example.com"> -->
+      <input type="password" class="form-control" id="password" required [(ngModel)]="model.password" name="password"
+        #password="ngModel"> 
+        <mat-error
+        [hidden]="password.valid || password.pristine">
+        Please enter a valid password
+      </mat-error>
+    </mat-form-field>
+    <div class="example-button-row">
+      <button mat-raised-button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    </div>
+  </form>
+</div>
