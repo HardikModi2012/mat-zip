@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "emailFormControl": "new@gmail.com",
+      "passwordFormControl": "123456",
+      "firstNameFormControl": "new",
+      "lastNameFormControl": "gmail",
+      "dateFormControl": "",
+      "AddressFormControl": "",
+      "radioOption": "",
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

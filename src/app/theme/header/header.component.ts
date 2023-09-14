@@ -10,34 +10,36 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private auth: AuthService, private cookieService: CookieService, private router: Router) { }
-  isAuthenticated : boolean = false;
   authListenerSubs!: Subscription;
   isLoggedIn = false;
+  constructor(private auth: AuthService, private cookieService: CookieService, private router: Router) { }
   ngOnInit() {
-  if (this.cookieService.get('username') && this.cookieService.get('token')) {
-    this.isLoggedIn = true;
     this.authListenerSubs = this.auth.getAuthStatusListener()
     .subscribe(isAuthenticated => {
       this.isLoggedIn = isAuthenticated
-      console.log("isLoggedIn", this.isLoggedIn);
+      this.router.navigate(['/welcome'])
       
     });
-    this.router.navigate(['/welcome'])
-  } else {
-    this.isLoggedIn = false;
-  }      
+    if (this.cookieService.get('emailFormControl') && this.cookieService.get('passwordFormControl')) {
+      this.isLoggedIn = true;
+      this.router.navigate(['/welcome'])
+    } else {
+      this.isLoggedIn = false;
+      this.router.navigate(['/login'])
+    }
   }
 
-  login(){
+  login() {
     this.router.navigate(['/login'])
   }
 
-  logout(){
-    this.cookieService.delete('username');
-    this.cookieService.delete('token');
-    window.localStorage.removeItem('user');
-    this.isLoggedIn = false;
+  signUp(){
+    this.logout();
   }
 
+  logout() {
+    this.cookieService.delete('emailFormControl');
+    this.cookieService.delete('passwordFormControl');
+    this.isLoggedIn = false;
+  }
 }

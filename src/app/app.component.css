@@ -1,0 +1,11 @@
+.app-spacer {
+    flex: 1 1 auto;
+}
+
+section {
+    display: table;
+}
+
+.ml-5 {
+    margin-left: 10px;
+  }

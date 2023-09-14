@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form class="login-form" #f="ngForm" (ngSubmit)="login(f)">
+      <mat-form-field class="login-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput name="emailFormControl" ngModel #emailFormControl="ngModel"
+          placeholder="Ex. pat@example.com" email required>
+        <span *ngIf="f.submitted && emailFormControl.errors">
+          <mat-error *ngIf="emailFormControl.errors['required']">
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.errors['email']">
+            Email must be a valid email address.
+          </mat-error>
+        </span>
+      </mat-form-field>
+
+      <mat-form-field class="login-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput required ngModel autocomplete id="passwordFormControl"
+          name="passwordFormControl" #passwordFormControl="ngModel" minlength="6">
+        <mat-error *ngIf="f.submitted && emailFormControl.errors">
+          Please enter a valid password
+        </mat-error>
+      </mat-form-field>
+      <div class="center-button">
+        <button mat-raised-button type="submit">Login</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

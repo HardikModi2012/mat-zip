@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,13 +16,20 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  ngOnDestroy(): void {
+    this.authSub?.unsubscribe();
+  }
+
+  authSub!: Subscription;
   signUpForm!: FormGroup;
   showFields: boolean = false;
+  submitted = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private auth: AuthService,
   ) {}
 
   ngOnInit() {
@@ -40,24 +49,33 @@ export class SignupComponent implements OnInit {
       radioOption: new FormControl(''),
     });
   }
-
+  get f() { return this.signUpForm.controls; }
   signup() {
+    this.submitted = true;
     this.signUpForm.markAllAsTouched();
     if (!this.signUpForm.valid) {
       return;
     }
 
     let formValue = this.signUpForm.value;
-    // console.log('formValue', formValue);
 
     if (!formValue) {
       return;
     }
-    window.localStorage.setItem('user', JSON.stringify(formValue));
 
-    this.cookieService.set('username', formValue.emailFormControl as string);
-    this.cookieService.set('token', formValue.passwordFormControl as string);
-    this.router.navigate(['/login']);
+    this.cookieService.set('emailFormControl', formValue.emailFormControl as string);
+    this.cookieService.set('passwordFormControl', formValue.passwordFormControl as string);
+    this.authSub = this.auth.signup(formValue).subscribe({
+      next: (data: any) => {
+        if (data) {
+          this.router.navigate(['/login']);
+        }
+      },
+      error: (err: any) => {
+      },
+      complete: () => {
+      }
+    });
   }
 
   radioButtonValue(event: any) {

@@ -10,12 +10,11 @@ export class CalculateAgePipe implements PipeTransform {
     let today = moment();
     let birthDate = moment(value);
     let years = today.diff(birthDate, 'years');
-    let html: string = years + " yr ";
+    let dob: string = years + " yr ";
 
-    html += today.subtract(years, 'years').diff(birthDate, 'months') + " mo";
-    console.log("html", html);
+    dob += today.subtract(years, 'years').diff(birthDate, 'months') + " mo";
     
-    return html;
+    return dob;
   }
 
 }

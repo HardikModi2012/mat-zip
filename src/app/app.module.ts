@@ -6,22 +6,16 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './theme/header/header.component';
 import { FooterComponent } from './theme/footer/footer.component';
-import { LoginComponent } from './login/login/login.component';
-import { SignupComponent } from './signup/signup/signup.component';
-import { WelcomeComponent } from './welcome-page/welcome/welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { MatModule } from './modules/mat/mat.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatModule } from './modules/mat.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent,
-    SignupComponent,
-    WelcomeComponent
   ],
   imports: [
     BrowserModule,

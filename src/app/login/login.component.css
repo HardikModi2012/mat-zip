@@ -1,0 +1,33 @@
+.login-form {
+  width: 100%;
+  min-width: 300px;
+  max-width: 300px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 150px;
+  margin-right: 113px;
+}
+
+.center-button {
+  margin-left: 120px;
+  margin-right: 113px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.login-full-width {
+  width: 100%;
+}

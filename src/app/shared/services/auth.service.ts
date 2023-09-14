@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
+import { Profile } from '../models/profile';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +11,20 @@ export class AuthService {
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
-  constructor(
-    private cookieService: CookieService,
-    private router: Router,
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) { }
 
-  public login(): any {
-    // this.subject.next(true);
+
+  public login(emailFormControl: string, passwordFormControl: any): any {
     this.authStatusListener.next(true);
-  }
+    return this.http.get<Profile[]>('http://localhost:3000/posts');
+  };
 
   public signup(formData: any): any {
-    let data = formData;
-    return true;
+    return this.http.post<Profile>('http://localhost:3000/posts', formData);
+  };
+
+  get() {
+    return this.http.get<Profile[]>('http://localhost:3000/posts');
   }
+
 }

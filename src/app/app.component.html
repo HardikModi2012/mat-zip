@@ -1,5 +1,12 @@
 <div id="wrapper">
-  <app-header></app-header>
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="app-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="app-spacer"></span>
+    <a mat-stroked-button routerLink="/signUp"  (click)="signUp()">Sign up</a>
+    <a mat-stroked-button class="ml-5" routerLink="/Login" (click)="isLoggedIn ? logout() : login()"> {{ isLoggedIn ? 'Log out' : 'login' }} </a>
+  </mat-toolbar>
   <router-outlet></router-outlet>
-  <!-- <app-footer></app-footer> -->
 </div>

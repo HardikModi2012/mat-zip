@@ -2,27 +2,31 @@
   <mat-card>
     <mat-card-title>Sign up</mat-card-title>
     <mat-card-content>
-      <form class="example-form" [formGroup]="signUpForm" (ngSubmit)="signup()">
-        <mat-form-field class="example-full-width">
+      <form class="signup-form" [formGroup]="signUpForm" (ngSubmit)="signup()">
+        <mat-form-field class="signup-full-width">
           <mat-label>Email</mat-label>
           <input matInput type="email" formControlName="emailFormControl">
-          <mat-error
-            *ngIf="signUpForm.controls['emailFormControl'].invalid && (signUpForm.controls['emailFormControl'].dirty || signUpForm.controls['emailFormControl'].touched)">
-            Email is <strong>required</strong>
-          </mat-error>
+          <div *ngIf="submitted && f['emailFormControl'].errors" class="invalid-feedback">
+            <mat-error *ngIf="f['emailFormControl'].errors['required']">
+              Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="f['emailFormControl'].errors['email']">
+              Email must be a valid email address
+            </mat-error>
+          </div>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>password</mat-label>
+        <mat-form-field class="signup-full-width">
+          <mat-label>Password</mat-label>
           <input matInput type="password" formControlName="passwordFormControl">
           <mat-error
             *ngIf="signUpForm.controls['passwordFormControl'].invalid && (signUpForm.controls['passwordFormControl'].dirty || signUpForm.controls['passwordFormControl'].touched)">
-            Please enter a valid password
+            Please enter a password
           </mat-error>
         </mat-form-field>
 
-        <table class="example-full-width" cellspacing="0">
+        <table class="signup-full-width" cellspacing="0">
           <tr>
-            <td><mat-form-field class="example-full-width">
+            <td><mat-form-field class="signup-full-width">
                 <mat-label>First name</mat-label>
                 <input matInput formControlName="firstNameFormControl">
                 <mat-error
@@ -30,7 +34,7 @@
                   Please enter your first name
                 </mat-error>
               </mat-form-field></td>
-            <td><mat-form-field class="example-full-width">
+            <td><mat-form-field class="signup-full-width">
                 <mat-label>Last Name</mat-label>
                 <input matInput formControlName="lastNameFormControl">
                 <mat-error
@@ -60,7 +64,7 @@
           <p *ngIf="signUpForm.controls['dateFormControl'].value">Age: {{ signUpForm.controls['dateFormControl'].value |
             calculateAge}}</p>
           <p>
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="signup-full-width">
               <mat-label>Address</mat-label>
               <textarea matInput formControlName="AddressFormControl"></textarea>
               <mat-error
